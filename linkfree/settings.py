@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", "dev-change-me")
 DEBUG = os.environ.get("DEBUG", "True") == "True"
 
-# Host e proxy (Render)
+# Host / Proxy (Render)
 RENDER_HOST = os.environ.get("RENDER_EXTERNAL_HOSTNAME", "")
 ALLOWED_HOSTS = ["*"] if DEBUG else ([RENDER_HOST] if RENDER_HOST else ["*"])
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
@@ -63,14 +63,11 @@ TEMPLATES = [
 ]
 
 # --- Database ---
-# In dev: sqlite nel repo; in prod: puoi impostare DB_PATH=/var/data/db.sqlite3 (se poi userai persistent disk)
-DB_PATH = os.environ.get("DB_PATH")
-DB_NAME = Path(DB_PATH) if DB_PATH else (BASE_DIR / "db.sqlite3")
-
+# Disco effimero su Render: ok per adesso
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": DB_NAME,
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
@@ -88,23 +85,23 @@ TIME_ZONE = "Europe/Rome"
 USE_I18N = True
 USE_TZ = True
 
-# --- Static files ---
+# --- Statici ---
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [BASE_DIR / "static"]  # tuoi asset
+STATIC_ROOT = BASE_DIR / "staticfiles"    # dove collectstatic mette i file
 if not DEBUG:
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# --- Media (avatar, upload) ---
+# --- Media (avatar/upload) ---
 MEDIA_URL = "/media/"
-MEDIA_ROOT = Path(os.environ.get("MEDIA_ROOT", BASE_DIR / "media"))
+MEDIA_ROOT = BASE_DIR / "media"
 
-# --- Redirect dopo login/logout ---
+# --- Login/Logout redirect ---
 LOGIN_REDIRECT_URL = "dashboard"
 LOGOUT_REDIRECT_URL = "login"
 
-# --- Email (in dev stampa in console) ---
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# --- Email (dev) ---
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-# --- Default ---
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
