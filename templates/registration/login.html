@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load form_extras %}
+{% block title %}Accedi | Linkfree{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-6 col-lg-5">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4">
+        <h1 class="h4 mb-3">Accedi</h1>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            {{ form.username|add_class:"form-control" }}
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            {{ form.password|add_class:"form-control" }}
+          </div>
+          <button class="btn btn-primary w-100">Entra</button>
+        </form>
+        <div class="d-flex justify-content-between mt-3">
+          <a href="{% url 'password_reset' %}">Password dimenticata?</a>
+          <a href="{% url 'signup' %}">Crea un account</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+/* ===== BASE STYLE ===== */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* ===== LINK BUTTONS ===== */
+.app-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 14px;
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.app-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* ===== COLORI PER OGNI TIPOLOGIA ===== */
+.link-instagram {
+  background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF);
+}
+
+.link-youtube {
+  background-color: #FF0000;
+}
+
+.link-tiktok {
+  background-color: #000;
+}
+
+.link-twitter {
+  background-color: #1DA1F2;
+}
+
+.link-website {
+  background-color: #4CAF50;
+}
+
+.link-altro {
+  background-color: #555;
+}
+
+/* ===== COPIA LINK BOX ===== */
+.share-card input {
+  font-size: 0.9rem;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .app-btn {
+    font-size: 1rem;
+    padding: 0.9rem;
+  }
+}

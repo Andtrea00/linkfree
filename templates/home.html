@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Benvenuto | Linkfree{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 col-lg-6">
+    <div class="card shadow-sm border-0">
+      <div class="card-body p-4 text-center">
+        <h1 class="h3 mb-3">Crea il tuo profilo Linkfree</h1>
+        <p class="text-muted">Una pagina con tutti i tuoi link, gratis.</p>
+        <a class="btn btn-primary btn-lg w-100" href="{% url 'signup' %}">Inizia gratis</a>
+        <p class="mt-3 mb-0">Hai già un account? <a href="{% url 'login' %}">Accedi</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

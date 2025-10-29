@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: linkfree
+    runtime: python
+    plan: starter
+
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+
+    startCommand: gunicorn linkfree.wsgi:application --bind 0.0.0.0:$PORT
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: DB_PATH
+        value: /var/data/db.sqlite3
+      - key: MEDIA_ROOT
+        value: /var/data/media
+      # opzionale: Render popola questo host pubblico dopo il primo deploy
+      - key: RENDER_EXTERNAL_HOSTNAME
+        fromService:
+          name: linkfree
+          type: web
+          property: host
+
+    disk:
+      name: data
+      mountPath: /var/data
+      sizeGB: 1
+
+    postDeployCommand: |
+      python manage.py migrate --noinput
