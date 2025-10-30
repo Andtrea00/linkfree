@@ -1,17 +1,21 @@
+# Aggiungi (o sistema) .gitignore
+@"
 # Python
 __pycache__/
 *.py[cod]
-*.sqlite3
-venv/
-.env
+*.pyo
+*.pyd
 
 # Django
 staticfiles/
 media/
 
-# VSCode
-.vscode/
+# Venv / env
+venv/
+.env
 
-# OS
+# Editor / OS
+.vscode/
 .DS_Store
 Thumbs.db
+"@ | Out-File .gitignore -Encoding utf8
